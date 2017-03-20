@@ -77,8 +77,8 @@ class EvolutionaryRegexFeaturizer:
 
         # Set up Statistics tracker
         stats = tools.Statistics(key=lambda ind: ind.fitness.values)
-        stats.register('Median score', np.median)
-        stats.register('Best score', np.max)
+        stats.register('median score', np.median)
+        stats.register('best score', np.max)
 
         # Set up HallOfFame (tracks best individuals over time)
         hof = tools.HallOfFame(feature_size)

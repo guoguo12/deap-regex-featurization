@@ -19,7 +19,7 @@ TEST_SIZE = 0.33
 
 FEATURE_SIZE = 64
 REGEX_SIZE = 12
-NUM_GENERATIONS = 20
+NUM_GENERATIONS = 10
 POP_SIZE = 512
 
 
@@ -47,7 +47,7 @@ def svm_acc(X_train, y_train, X_test, y_test, C, kernel='rbf'):
 X_train, X_test, y_train, y_test = get_binarized_data()
 
 regex_chars = ['0', '1', '(', ')?', ')*']
-init_set = [0, 1]  # Intialize with 0's and 1's
+init_set = range(4)  # Initialize with first four kinds of regex characters
 
 erf = EvolutionaryRegexFeaturizer(regex_chars, init_set, X_train, y_train, 10)
 erf.train(FEATURE_SIZE, REGEX_SIZE, NUM_GENERATIONS, POP_SIZE)
@@ -55,7 +55,7 @@ erf.train(FEATURE_SIZE, REGEX_SIZE, NUM_GENERATIONS, POP_SIZE)
 X_train_f, X_test_f = map(erf.featurize, (X_train, X_test))
 X_train_raw, X_test_raw, _, _ = get_binarized_data(stringify=False)
 
-for C in np.logspace(-2, 5, 9):
+for C in np.logspace(-2, 5, 8):
     raw_acc = svm_acc(X_train_raw, y_train, X_test_raw, y_test, C)
     featurized_acc = svm_acc(X_train_f, y_train, X_test_f, y_test, C)
     print('C={:.2f}, raw accuracy={:.3f}, featurized accuracy={:.3f}'.format(
