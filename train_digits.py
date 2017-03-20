@@ -55,13 +55,8 @@ erf.train(FEATURE_SIZE, REGEX_SIZE, NUM_GENERATIONS, POP_SIZE)
 X_train_f, X_test_f = map(erf.featurize, (X_train, X_test))
 X_train_raw, X_test_raw, _, _ = get_binarized_data(stringify=False)
 
-# X_train_comb = np.append(X_train_f, X_train_raw, axis=1)
-# X_test_comb = np.append(X_test_f, X_test_raw, axis=1)
-
 for C in np.logspace(-2, 5, 9):
     raw_acc = svm_acc(X_train_raw, y_train, X_test_raw, y_test, C)
     featurized_acc = svm_acc(X_train_f, y_train, X_test_f, y_test, C)
     print('C={:.2f}, raw accuracy={:.3f}, featurized accuracy={:.3f}'.format(
         C, raw_acc, featurized_acc))
-    # combined_acc = svm_acc(X_train_comb, y_train, X_test_comb, y_test, C)
-    # print('C={:.2f}, raw accuracy={:.3f}, featurized accuracy={:.3f}, combined accuracy={:.3f}'.format(C, raw_acc, featurized_acc, combined_acc))
