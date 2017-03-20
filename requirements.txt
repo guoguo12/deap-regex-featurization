@@ -1,0 +1,3 @@
+scikit-learn
+deap
+python-mnist
