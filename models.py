@@ -13,16 +13,16 @@ FAILED_REGEX_SCORE = float('-inf')
 
 class EvolutionaryRegexFeaturizer:
 
-    def __init__(self, regex_chars, init_set, train_x, train_y, num_classes):
-        self.regex_chars = regex_chars
+    def __init__(self, regex_comps, init_set, train_x, train_y, num_classes):
+        self.regex_comps = regex_comps
         self.init_set = init_set
         self.train_x = train_x
         self.train_y = train_y
         self.num_classes = num_classes
 
-        self.max_valid_char = len(regex_chars) - 1
-        self.to_regex = lambda arr: re.compile(''.join(regex_chars[i] for i in arr))
-        self.from_regex = lambda s: s.translate({ord(ch): i for i, ch in enumerate(regex_chars)})
+        self.max_valid_char = len(regex_comps) - 1
+        self.to_regex = lambda arr: re.compile(''.join(regex_comps[i] for i in arr))
+        self.from_regex = lambda s: s.translate({ord(ch): i for i, ch in enumerate(regex_comps)})
 
     @staticmethod
     def _count_matches(regex, s):

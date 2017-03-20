@@ -46,10 +46,10 @@ def svm_acc(X_train, y_train, X_test, y_test, C, kernel='rbf'):
 
 X_train, X_test, y_train, y_test = get_binarized_data()
 
-regex_chars = ['0', '1', '(', ')?', ')*']
+regex_comps = ['0', '1', '(', ')?', ')*']
 init_set = range(4)  # Initialize with first four kinds of regex characters
 
-erf = EvolutionaryRegexFeaturizer(regex_chars, init_set, X_train, y_train, 10)
+erf = EvolutionaryRegexFeaturizer(regex_comps, init_set, X_train, y_train, 10)
 erf.train(FEATURE_SIZE, REGEX_SIZE, NUM_GENERATIONS, POP_SIZE)
 
 X_train_f, X_test_f = map(erf.featurize, (X_train, X_test))
